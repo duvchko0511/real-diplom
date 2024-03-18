@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "585728837923",
+    "project_id": "tugsuyoo",
+    "storage_bucket": "tugsuyoo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585728837923:android:52e18d764ba172ffba6496",
+        "android_client_info": {
+          "package_name": "com.example.tugsuyoo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGJPIV1-fNiWp80k9R-pZdPEsX3KqQ1pM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
