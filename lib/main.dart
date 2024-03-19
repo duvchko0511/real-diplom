@@ -8,20 +8,37 @@ import 'package:timezone/data/latest_all.dart';
 import 'package:timezone/timezone.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+// import 'package:get_storage/get_storage.dart';
 import 'package:tugsuyoo/app/data/services/storage/services.dart';
 import 'package:tugsuyoo/app/screens/home/binding.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tugsuyoo/login/login.dart';
 import 'firebase_options.dart';
-import 'package:tugsuyoo/features/ondboarding/screens/onboarding_screen.dart';
-import 'app/screens/home/view.dart';
+// import 'package:tugsuyoo/features/ondboarding/screens/onboarding_screen.dart';
 
-Future<void> main() async {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  await Get.putAsync(() => StorageService().init());
+Platform.isAndroid?
+
+  await Firebase.initializeApp(
+  options: const FirebaseOptions(
+    apiKey: 'AIzaSyDRNFmxQ_ELmV4EYxwNXlTkq5ZZt-QmIvU',
+    appId: '1:585728837923:web:ced5f39a889ee2dcba6496',
+    messagingSenderId: '585728837923',
+    projectId: 'tugsuyoo',
+    authDomain: 'tugsuyoo.firebaseapp.com',
+    storageBucket: 'tugsuyoo.appspot.com',
+    measurementId: 'G-T3T59GC94D',
+  ))
+  :await Firebase.initializeApp();
   runApp(const MyApp());
 }
+//Future<void> main() async {
+// WidgetsFlutterBinding.ensureInitialized();
+//  await GetStorage.init();
+//  await Get.putAsync(() => StorageService().init());
+//  runApp(const MyApp());
+//}
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -48,7 +65,8 @@ class _MyAppState extends State<MyApp> {
       title: 'To do app using Getx',
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.system,
-      home: const OnboardingScreen(),
+      //OnboardingScreen()
+      home: const LogIn(),
       locale: LocalizationService.locale,
       fallbackLocale: LocalizationService.fallbackLocale,
       translations: LocalizationService(),

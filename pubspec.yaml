@@ -51,6 +51,10 @@ dependencies:
   iconsax: ^0.0.8
   font_awesome_flutter: ^10.7.0
   palette_generator: ^0.3.3+3
+  firebase_auth: ^4.17.8
+  google_sign_in: ^6.2.1
+  the_apple_sign_in: ^1.1.1
+  cloud_firestore: ^4.15.8
 
 dev_dependencies:
   flutter_test:
