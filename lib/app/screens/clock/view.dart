@@ -12,7 +12,14 @@ class ClockPage extends GetView<ClockController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Obx(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/alarm.jpg"), // Replace this with your image path
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Obx(
           () => IndexedStack(
             index: controller.tabIndex.value,
             children: [
@@ -41,42 +48,44 @@ class ClockPage extends GetView<ClockController> {
             ],
           ),
         ),
-        bottomNavigationBar: Theme(
-          data: ThemeData(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent),
-          child: Obx(
-            () => BottomNavigationBar(
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              onTap: (int index) => controller.changeTabIndex(index),
-              currentIndex: controller.tabIndex.value,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              items: [
-                BottomNavigationBarItem(
-                  label: 'alarm'.tr,
-                  icon: Padding(
-                    padding: EdgeInsets.only(right: 15.0.wp),
-                    child: const Icon(Icons.alarm_add),
-                  ),
+      ),
+      bottomNavigationBar: Theme(
+        data: ThemeData(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent),
+        child: Obx(
+          () => BottomNavigationBar(
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            onTap: (int index) => controller.changeTabIndex(index),
+            currentIndex: controller.tabIndex.value,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            items: [
+              BottomNavigationBarItem(
+                label: 'alarm'.tr,
+                icon: Padding(
+                  padding: EdgeInsets.only(right: 15.0.wp),
+                  child: const Icon(Icons.alarm_add),
                 ),
-                BottomNavigationBarItem(
-                  label: 'timer'.tr,
-                  icon: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5.0.wp),
-                    child: const Icon(Icons.timer),
-                  ),
+              ),
+              BottomNavigationBarItem(
+                label: 'timer'.tr,
+                icon: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0.wp),
+                  child: const Icon(Icons.timer),
                 ),
-                BottomNavigationBarItem(
-                  label: 'clock'.tr,
-                  icon: Padding(
-                    padding: EdgeInsets.only(left: 15.0.wp),
-                    child: const Icon(Icons.access_time),
-                  ),
+              ),
+              BottomNavigationBarItem(
+                label: 'clock'.tr,
+                icon: Padding(
+                  padding: EdgeInsets.only(left: 15.0.wp),
+                  child: const Icon(Icons.access_time),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

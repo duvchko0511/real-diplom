@@ -4,11 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:timezone/data/latest_all.dart';
 import 'package:timezone/timezone.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-// import 'package:get_storage/get_storage.dart';
+
 import 'package:tugsuyoo/app/data/services/storage/services.dart';
 import 'package:tugsuyoo/app/screens/home/binding.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +19,7 @@ import 'firebase_options.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  
 Platform.isAndroid?
 
   await Firebase.initializeApp(
@@ -32,13 +34,13 @@ Platform.isAndroid?
   ))
   :await Firebase.initializeApp();
   runApp(const MyApp());
+
+
+ WidgetsFlutterBinding.ensureInitialized();
+ await GetStorage.init();
+  await Get.putAsync(() => StorageService().init());
+  runApp(const MyApp());
 }
-//Future<void> main() async {
-// WidgetsFlutterBinding.ensureInitialized();
-//  await GetStorage.init();
-//  await Get.putAsync(() => StorageService().init());
-//  runApp(const MyApp());
-//}
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

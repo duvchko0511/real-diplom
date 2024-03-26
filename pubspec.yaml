@@ -55,6 +55,11 @@ dependencies:
   google_sign_in: ^6.2.1
   the_apple_sign_in: ^1.1.1
   cloud_firestore: ^4.15.8
+  flutter_bloc: ^8.1.4
+  rxdart: ^0.27.7
+  animations: ^2.0.11
+  http: ^0.13.6
+  google_generative_ai: ^0.0.1-dev
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +87,9 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/google.png
+    - assets/images/apple.png
+    - assets/images/apple1.png
     - assets/images/task_image.png
     - assets/images/english.png
     - assets/images/mongolian.png

@@ -109,7 +109,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       ),
                       SizedBox(height: 8),
                       Text(
-                        "Retree",
+                        "Good Morning",
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,

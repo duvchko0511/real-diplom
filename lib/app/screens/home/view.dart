@@ -17,94 +17,107 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(
-        () => IndexedStack(
-          index: controller.tabIndex.value,
-          children: [
-            SafeArea(
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(4.0.wp),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
+      body: Stack(
+        children: [
+          // Background Image
+          Image.asset(
+            "assets/images/6_night.jpeg", // Replace this with your image path
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+          ),
+          // Page Content
+          Obx(
+            () => IndexedStack(
+              index: controller.tabIndex.value,
+              children: [
+                SafeArea(
+                  child: ListView(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(4.0.wp),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Icon(
-                              Icons.apps,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              width: 3.0.wp,
-                            ),
-                            Text(
-                              'task'.tr,
-                              style: TextStyle(
-                                  fontSize: 24.0.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Get.to(() => const ClockPage(),
-                                    binding: ClockBinding(),
-                                    transition: Transition.downToUp);
-                              },
-                              icon: const Icon(Icons.alarm),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Get.isDarkMode
-                                    ? Get.changeTheme(ThemeData.light())
-                                    : Get.changeTheme(ThemeData.dark());
-                              },
-                              icon: Icon(Get.isDarkMode
-                                  ? Icons.light_mode
-                                  : Icons.dark_mode),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Obx(
-                    () => GridView.count(
-                      crossAxisCount: 2,
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      children: [
-                        ...controller.tasks
-                            .map(
-                              (element) => LongPressDraggable(
-                                data: element,
-                                onDragStarted: () =>
-                                    controller.changeDeleting(true),
-                                onDraggableCanceled: (_, __) =>
-                                    controller.changeDeleting(false),
-                                onDragEnd: (_) =>
-                                    controller.changeDeleting(false),
-                                feedback: Opacity(
-                                  opacity: 0.8,
-                                  child: TaskCard(task: element),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.apps,
+                                  color: Colors.blue,
                                 ),
-                                child: TaskCard(task: element),
-                              ),
-                            )
-                            .toList(),
-                        AddCard(),
-                      ],
-                    ),
+                                SizedBox(
+                                  width: 3.0.wp,
+                                ),
+                                Text(
+                                  'task'.tr,
+                                  style: TextStyle(
+                                    fontSize: 24.0.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    Get.to(() => const ClockPage(),
+                                        binding: ClockBinding(),
+                                        transition: Transition.downToUp);
+                                  },
+                                  icon: const Icon(Icons.alarm),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    Get.isDarkMode
+                                        ? Get.changeTheme(ThemeData.light())
+                                        : Get.changeTheme(ThemeData.dark());
+                                  },
+                                  icon: Icon(Get.isDarkMode
+                                      ? Icons.light_mode
+                                      : Icons.dark_mode),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Obx(
+                        () => GridView.count(
+                          crossAxisCount: 2,
+                          shrinkWrap: true,
+                          physics: const ClampingScrollPhysics(),
+                          children: [
+                            ...controller.tasks
+                                .map(
+                                  (element) => LongPressDraggable(
+                                    data: element,
+                                    onDragStarted: () =>
+                                        controller.changeDeleting(true),
+                                    onDraggableCanceled: (_, __) =>
+                                        controller.changeDeleting(false),
+                                    onDragEnd: (_) =>
+                                        controller.changeDeleting(false),
+                                    feedback: Opacity(
+                                      opacity: 0.8,
+                                      child: TaskCard(task: element),
+                                    ),
+                                    child: TaskCard(task: element),
+                                  ),
+                                )
+                                .toList(),
+                            AddCard(),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                ReportPage(),
+              ],
             ),
-            ReportPage(),
-          ],
-        ),
+          ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: DragTarget<Task>(

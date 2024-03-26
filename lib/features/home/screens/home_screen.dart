@@ -4,25 +4,56 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:tugsuyoo/app/screens/home/view.dart';
 import 'package:tugsuyoo/features/detail/screen/detail_screen.dart';
 import 'package:tugsuyoo/features/home/models/retreat_model.dart';
 import 'package:tugsuyoo/features/home/screens/bottom_bar.dart';
+import 'package:tugsuyoo/features/ondboarding/screens/onboarding_screen.dart';
+import 'package:tugsuyoo/pages/news.dart';
+import 'package:tugsuyoo/pages/api_screen.dart';
+import 'package:tugsuyoo/pages/user.dart';
+import 'package:tugsuyoo/water/ui/home/home_page.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomNavBar(
         navItems: [
-          CustomNavItem(iconName: Iconsax.home5, selected: true),
-          CustomNavItem(iconName: Iconsax.search_normal, selected: false),
-          CustomNavItem(iconName: Iconsax.notification5, selected: false),
-          CustomNavItem(iconName: Iconsax.user, selected: false),
+          CustomNavItem(iconName: Icons.home, selected: true),
+          CustomNavItem(iconName: Icons.search, selected: false),
+          CustomNavItem(iconName: Icons.notifications, selected: false),
+          CustomNavItem(iconName: Icons.person, selected: false),
         ],
         onItemSelected: (index) {
-          // Handle item selection here
+          switch (index) {
+            case 0:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+              break;
+            case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationPage())
+              );
+              break;
+            case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationPage()),
+              );
+              break;
+            case 3:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WaterPage()),
+              );
+              break;
+          }
         },
       ),
       body: SingleChildScrollView(
@@ -228,7 +259,7 @@ class HomeScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "Explore categories",
+                "Таны өглөө",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -245,31 +276,31 @@ class HomeScreen extends StatelessWidget {
                   CategoryButton(
                     color: Colors.green,
                     icon: FontAwesomeIcons.tree,
-                    name: "Nature",
+                    name: "Байгаль",
                   ),
                   SizedBox(width: 18),
                   CategoryButton(
                     color: Colors.brown,
                     icon: FontAwesomeIcons.personHiking,
-                    name: "Adventure",
+                    name: "Нийгэм",
                   ),
                   SizedBox(width: 18),
                   CategoryButton(
                     color: Colors.red,
-                    icon: Iconsax.heart_circle,
-                    name: "Romance",
+                    icon: FontAwesomeIcons.bookMedical,
+                    name: "Эрүүл мэнд",
                   ),
                   SizedBox(width: 18),
                   CategoryButton(
                     color: Colors.indigo,
                     icon: FontAwesomeIcons.personRunning,
-                    name: "Yoga",
+                    name: "Дасгал",
                   ),
                   SizedBox(width: 18),
                   CategoryButton(
                     color: Colors.orangeAccent,
-                    icon: FontAwesomeIcons.personRifle,
-                    name: "Wildlife",
+                    icon: FontAwesomeIcons.shrimp,
+                    name: "Хоол хүнс",
                   ),
                   SizedBox(width: 18),
                   CategoryButton(

@@ -55,7 +55,7 @@ class TodoStaticItem extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 12.0.sp,
-                color: Colors.grey,
+                color: Color.fromARGB(255, 12, 12, 12),
               ),
             ),
           ],
