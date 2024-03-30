@@ -43,7 +43,7 @@ class HomePage extends GetView<HomeController> {
                               children: [
                                 const Icon(
                                   Icons.apps,
-                                  color: Colors.blue,
+                                  color: Color.fromARGB(255, 117, 53, 28),
                                 ),
                                 SizedBox(
                                   width: 3.0.wp,

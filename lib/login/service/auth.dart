@@ -1,3 +1,4 @@
+import 'package:tugsuyoo/features/home/screens/home_screen.dart';
 import 'package:tugsuyoo/features/ondboarding/screens/onboarding_screen.dart';
 import 'package:tugsuyoo/login/service/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,7 +43,7 @@ class AuthMethods {
           .addUser(userDetails.uid, userInfoMap)
           .then((value) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       });
     }
   }

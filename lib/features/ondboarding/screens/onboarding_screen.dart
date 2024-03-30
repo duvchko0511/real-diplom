@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tugsuyoo/animations/fade_in.dart';
 import 'package:tugsuyoo/animations/opacity_in.dart';
 import 'package:tugsuyoo/features/home/screens/home_screen.dart';
+import 'package:tugsuyoo/login/login.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -156,7 +157,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) => const HomeScreen(),
+                          builder: (context) => const LogIn(),
                         ),
                       );
                     },

@@ -1,3 +1,4 @@
+import 'package:tugsuyoo/features/home/screens/home_screen.dart';
 import 'package:tugsuyoo/features/ondboarding/screens/onboarding_screen.dart';
 import 'package:tugsuyoo/login/forgot_password.dart';
 import 'package:tugsuyoo/login/service/auth.dart';
@@ -27,7 +28,7 @@ class _LogInState extends State<LogIn> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const OnboardingScreen()));
+              builder: (context) => HomeScreen()));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -55,7 +56,7 @@ class _LogInState extends State<LogIn> {
       body: Stack(
         children: [
           Image.asset(
-            "assets/images/1_morning_bird.jpeg",
+            "assets/images/nevtreh.jpg",
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,

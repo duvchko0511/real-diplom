@@ -133,27 +133,20 @@ class _IconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).bottomNavigationBarTheme;
-    return TweenAnimationBuilder<Color?>(
-      duration: _transitionDuration,
-      tween: ColorTween(
-        begin: theme.unselectedItemColor,
-        end: isSelected ? theme.selectedItemColor : theme.unselectedItemColor,
-      ),
-      builder: (context, color, child) {
-        return GestureDetector(
-          onTap: onPressed,
-          behavior: HitTestBehavior.translucent,
-          child: SizedBox(
-            height: _kBarHeight,
-            width: _kItemWidth,
-            child: Icon(
-              icon,
-              size: 32,
-              color: color,
-            ),
-          ),
-        );
-      },
-    );
+   return GestureDetector(
+  onTap: onPressed,
+  behavior: HitTestBehavior.translucent,
+  child: SizedBox(
+    height: _kBarHeight,
+    width: _kItemWidth,
+    child: Icon(
+      icon,
+      size: 32,
+      color: isSelected ? theme.selectedItemColor : theme.unselectedItemColor,
+    ),
+  ),
+);
+      
+    
   }
 }

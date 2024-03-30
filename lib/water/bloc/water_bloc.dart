@@ -45,3 +45,4 @@ class WaterBloc extends Cubit<WaterSettings> {
     return super.close();
   }
 }
+

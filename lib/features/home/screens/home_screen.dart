@@ -8,23 +8,43 @@ import 'package:tugsuyoo/app/screens/home/view.dart';
 import 'package:tugsuyoo/features/detail/screen/detail_screen.dart';
 import 'package:tugsuyoo/features/home/models/retreat_model.dart';
 import 'package:tugsuyoo/features/home/screens/bottom_bar.dart';
-import 'package:tugsuyoo/features/ondboarding/screens/onboarding_screen.dart';
-import 'package:tugsuyoo/pages/news.dart';
+import 'package:tugsuyoo/features/home/screens/profile.dart';
+
 import 'package:tugsuyoo/pages/api_screen.dart';
-import 'package:tugsuyoo/pages/user.dart';
+
 import 'package:tugsuyoo/water/ui/home/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserInfo();
+  }
+
+  Future<void> _getUserInfo() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    setState(() {
+      _user = auth.currentUser;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomNavBar(
         navItems: [
           CustomNavItem(iconName: Icons.home, selected: true),
-          CustomNavItem(iconName: Icons.search, selected: false),
-          CustomNavItem(iconName: Icons.notifications, selected: false),
+          CustomNavItem(iconName: Icons.chat, selected: false),
+          CustomNavItem(iconName: Icons.task_alt_rounded, selected: false),
           CustomNavItem(iconName: Icons.person, selected: false),
         ],
         onItemSelected: (index) {
@@ -32,19 +52,19 @@ class HomeScreen extends StatelessWidget {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
               );
               break;
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationPage())
+                MaterialPageRoute(builder: (context) => ChatScreen())
               );
               break;
             case 2:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationPage()),
+                MaterialPageRoute(builder: (context) => const  HomePage())
               );
               break;
             case 3:
@@ -56,7 +76,7 @@ class HomeScreen extends StatelessWidget {
           }
         },
       ),
-      body: SingleChildScrollView(
+     body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,25 +89,14 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Hello,",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w300,
-                          height: .99,
-                        ),
-                      ),
-                      Text(
-                        "Ananya",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          height: .99,
-                        ),
-                      ),
+            _user != null
+                ? Text(
+                    'Hello, ${_user!.displayName}',
+                    style: TextStyle(fontSize: 24),
+                ): CircularProgressIndicator()
                     ],
                   ),
                   const Spacer(),
@@ -103,12 +112,19 @@ class HomeScreen extends StatelessWidget {
                         pointRounding: .5,
                       ),
                       image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/dp.jpeg',
-                        ),
+                        image: AssetImage('assets/images/Saly-13.png'),
+                      ),
                       ),
                     ),
-                  ),
+                  IconButton(
+  icon: Icon(Icons.settings),
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => UserProfileMenu()),
+    );
+  },
+),
                 ],
               ),
             ),
@@ -123,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                   child: Stack(
                     children: [
                       Image.asset(
-                        'assets/images/1_morning_bird.jpeg',
+                        'assets/images/status.webp',
                         height: 200,
                         width: double.infinity,
                         fit: BoxFit.cover,
@@ -168,7 +184,7 @@ class HomeScreen extends StatelessWidget {
                         top: 10,
                         left: 20,
                         child: Text(
-                          "Featured",
+                          "Таны өглөө",
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
@@ -185,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                         top: 10,
                         left: 20,
                         child: Text(
-                          "Featured",
+                          "Таны өглөө",
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white,
@@ -217,36 +233,36 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Iconsax.location,
-                                  color: Colors.white,
-                                  size: 12,
-                                  shadows: [
-                                    BoxShadow(
-                                      blurRadius: 30,
-                                      spreadRadius: 100,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  "USA, Alabama",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w100,
-                                    fontSize: 12,
-                                    shadows: [
-                                      BoxShadow(
-                                        blurRadius: 30,
-                                        spreadRadius: 100,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     Icon(
+                            //       Iconsax.location,
+                            //       color: Colors.white,
+                            //       size: 12,
+                            //       shadows: [
+                            //         BoxShadow(
+                            //           blurRadius: 30,
+                            //           spreadRadius: 100,
+                            //         ),
+                            //       ],
+                            //     ),
+                            //     SizedBox(width: 5),
+                            //     Text(
+                            //       'var=location',
+                            //       style: TextStyle(
+                            //         color: Colors.white,
+                            //         fontWeight: FontWeight.w100,
+                            //         fontSize: 12,
+                            //         shadows: [
+                            //           BoxShadow(
+                            //             blurRadius: 30,
+                            //             spreadRadius: 100,
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
                           ],
                         ),
                       ),
@@ -259,7 +275,7 @@ class HomeScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
-                "Таны өглөө",
+                "GoodDay",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

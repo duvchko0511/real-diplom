@@ -1,3 +1,4 @@
+import 'package:tugsuyoo/features/home/screens/home_screen.dart';
 import 'package:tugsuyoo/features/ondboarding/screens/onboarding_screen.dart';
 import 'package:tugsuyoo/login/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,13 +23,17 @@ class _SignUpState extends State<SignUp> {
     if (password != null && namecontroller.text != "" && mailcontroller.text != "") {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
+            .createUserWithEmailAndPassword(email: email, password: password,);
+            User? user = userCredential.user;
+if (user != null) {
+  await user.updateDisplayName(name);
+}
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text(
               "Registered Successfully",
               style: TextStyle(fontSize: 20.0),
             )));
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const OnboardingScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
